@@ -1,0 +1,18 @@
+
+-- +migrate Up
+CREATE TABLE IF NOT EXISTS tasks
+(
+  id              BINARY(16) NOT NULL PRIMARY KEY,
+  todo_id         BINARY(16) NOT NULL,
+  title           VARCHAR(255) NOT NULL,
+  done            BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_todo_id
+    FOREIGN KEY (todo_id)
+    REFERENCES todos (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- +migrate Down
+DROP TABLE IF EXISTS tasks;

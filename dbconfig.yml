@@ -1,0 +1,5 @@
+development:
+  dialect: mysql
+  datasource: docker:docker@tcp(host.docker.internal:3306)/todo_db?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true
+  dir: migrations
+  table: migrations
