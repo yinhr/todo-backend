@@ -25,6 +25,7 @@ var (
   SkippablePairs = []SkippablePair {
     SkippablePair{"/signup", http.MethodPost},
     SkippablePair{"/signin", http.MethodPost},
+    SkippablePair{"/healthcheck", http.MethodGet},
   }
   AuthenticationSkipper = func(c echo.Context) bool {
     for _, pair := range SkippablePairs {

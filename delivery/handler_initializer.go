@@ -24,16 +24,22 @@ const (
   SignupHdlr Handler = iota
   SigninHdlr
   TodoHdlr
+  HealthCheckHdlr
 )
 
 func GetInitializedHandlers(ucases *usecase.UCases) Handlers {
   handlers := make(Handlers)
+
   signupUsecase, _ := (*ucases)[usecase.SignupUCase].(*signup.SignupUsecase) 
-  signinUsecase, _ := (*ucases)[usecase.SigninUCase].(*signin.SigninUsecase) 
-  todoUsecase, _ := (*ucases)[usecase.TodoUCase].(*todo.TodoUsecase) 
   handlers[SignupHdlr] = &SignupHandler{signupUsecase} 
+
+  signinUsecase, _ := (*ucases)[usecase.SigninUCase].(*signin.SigninUsecase) 
   handlers[SigninHdlr] = &SigninHandler{signinUsecase} 
+
+  todoUsecase, _ := (*ucases)[usecase.TodoUCase].(*todo.TodoUsecase) 
   handlers[TodoHdlr] = &TodoHandler{todoUsecase} 
+
+  handlers[HealthCheckHdlr] = &HealthCheckHandler{}
   return handlers
 }
 
@@ -41,10 +47,12 @@ func ConfigureHandler(e *echo.Echo, handlers *Handlers) {
   signupHandler, _ := (*handlers)[SignupHdlr].(*SignupHandler) 
   e.POST("/signup", signupHandler.Post)
   e.GET("/signup", signupHandler.Index)
+
   signinHandler, _ := (*handlers)[SigninHdlr].(*SigninHandler) 
   e.GET("/signin", signinHandler.Get)
   e.POST("/signin", signinHandler.Post)
   e.DELETE("/signin", signinHandler.Delete)
+
   todoHandler, _ := (*handlers)[TodoHdlr].(*TodoHandler) 
   e.GET("/todo", todoHandler.Index)
   e.GET("/todo/edit", todoHandler.FindBy)
@@ -53,6 +61,9 @@ func ConfigureHandler(e *echo.Echo, handlers *Handlers) {
   e.PATCH("/todo", todoHandler.PatchTodo)
   e.PATCH("/task", todoHandler.PatchTask)
   e.DELETE("/todo", todoHandler.Destroy)
+
+  healthCheckHandler, _ := (*handlers)[HealthCheckHdlr].(*HealthCheckHandler)
+  e.GET("/healthcheck", healthCheckHandler.Get)
 }
 
 func ConfiguerMiddleware(e *echo.Echo, store sessions.Store) {
