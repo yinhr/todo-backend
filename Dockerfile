@@ -1,7 +1,7 @@
 FROM golang:latest
 
 #ENV GO111MODULE=on
-#ENV ECHO_ENV=development
+ENV ECHO_ENV=development
 #ENV ALLOWEDORIGIN=https://tododot.site
 #ENV DBHOST=host.docker.internal
 #ENV DBPORT=3306
