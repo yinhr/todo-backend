@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.5.0
+  aws-ecs: circleci/aws-ecs@0.0.19
 workflows:
   build_and_push_image:
     jobs:
@@ -9,3 +10,10 @@ workflows:
           repo: "${AWS_RESOURCE_NAME_PREFIX}-api"
           region: AWS_DEFAULT_REGION
           tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          aws-region: AWS_DEFAULT_REGION
+          family: "${AWS_RESOURCE_NAME_PREFIX}-api"
+          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}"
+          container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-api,tag=${CIRCLE_SHA1}"
