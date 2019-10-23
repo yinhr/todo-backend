@@ -1,16 +1,16 @@
 FROM golang:latest
 
-#ENV GO111MODULE=on
+ENV GO111MODULE=on
 ENV ECHO_ENV=development
-#ENV ALLOWEDORIGIN=https://tododot.site
-#ENV DBHOST=host.docker.internal
-#ENV DBPORT=3306
-#ENV DBNAME=todo_db
-#ENV DBUSER=docker
-#ENV DBPASS=docker
-#ENV REDISHOST=redis
-#ENV REDISPORT=6379
-#ENV REDISPASS=secret
+ENV ALLOWEDORIGIN=https://tododot.site
+ENV DBHOST=host.docker.internal
+ENV DBPORT=3306
+ENV DBNAME=todo_db
+ENV DBUSER=docker
+ENV DBPASS=docker
+ENV REDISHOST=redis
+ENV REDISPORT=6379
+ENV REDISPASS=secret
 
 WORKDIR /go/src/todo-api
 
