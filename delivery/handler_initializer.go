@@ -2,7 +2,6 @@ package delivery
 
 import (
   "net/http"
-  "os"
 
   "github.com/gorilla/sessions"
   "github.com/labstack/echo/v4"
