@@ -82,7 +82,7 @@ func sessionWithConfig(store sessions.Store) echo.MiddlewareFunc {
 
 func corsWithConfig() echo.MiddlewareFunc {
   return middleware.CORSWithConfig(middleware.CORSConfig {
-    AllowOrigins: []string{"http://localhost:8080", os.Getenv("ALLOWEDORIGIN")},
+    AllowOrigins: []string{"http://localhost:8080", "https://tododot.site"},
     AllowMethods: []string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
     AllowCredentials: true,
   })
