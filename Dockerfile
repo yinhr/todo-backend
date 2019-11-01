@@ -2,7 +2,7 @@ FROM golang:latest
 
 ENV GO111MODULE=on
 ENV ECHO_ENV=development
-ENV DBHOST=host.docker.internal
+ENV DBHOST=db
 ENV DBPORT=3306
 ENV DBNAME=todo_db
 ENV DBUSER=docker
