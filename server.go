@@ -6,7 +6,6 @@ import (
   "log"
   "net/url"
   "os"
-  "time"
 
   _ "github.com/go-sql-driver/mysql"
   "github.com/labstack/echo/v4"
@@ -31,15 +30,6 @@ func main() {
   dns := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?%s", dbUser, dbPass, dbHost, dbPort, dbName, params.Encode())
 
   conn, err := sql.Open(`mysql`, dns)
-  maxTries := 10
-  for maxTries > 0 {
-    maxTries--
-    err = conn.Ping()
-    if err == nil {
-      break
-    }
-    time.Sleep(5 * time.Second)
-  }
   if err != nil {
     log.Fatal(err)
     os.Exit(1)
