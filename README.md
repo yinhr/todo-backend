@@ -6,7 +6,7 @@ Go言語（[echo](https://echo.labstack.com/)フレームワーク）を用い�
 [Clean Architecture](https://medium.com/hackernoon/golang-clean-archithecture-efd6d7c43047)を参考に「model」「repository」「usecase」「delivery」の4層のアーキテクチャを採用
 
 ## todo管理アプリ
-以下参照 
+以下参照  
 [todo管理アプリについて](https://www.notion.so/prmcy/ToDo-14f83b283c4b4bd088ee9f11ebe5be13)
 
 ## 機能
